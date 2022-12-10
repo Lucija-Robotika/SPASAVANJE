@@ -1,0 +1,55 @@
+#pragma once
+#include "helper.h"
+
+void RobotLine::radionica() {
+  static int brojac = 0;
+
+  char simbol[10 + sizeof(char)];
+ if (front()>80 and front() < 120) {
+  go(-90,90);
+  delayMs(500);
+  
+    while(not lineAny()){
+      go(75,27);
+      delayMs(500);
+
+    noLoopWithoutThis();
+    }
+
+  }
+
+  if (lineAny()) {
+    if (line(0) && line(8) and brojac < 2) {
+      go(-90, 90);
+      delayMs(400);
+      brojac++;
+    }
+    else if (line(0) and line(6) and brojac == 2) {
+      go(90, -90);
+      delayMs(300);
+      brojac++;
+    }
+    else if (line(0) and line(6) and brojac == 3) {
+      go(90, 90);
+      delayMs(500);
+      brojac++;
+    }
+    
+    else if (line(0) and line(6) and brojac == 4) {
+      go(-90, 90);
+      delayMs(500);
+      brojac++;
+    }
+    else
+      lineFollow();
+  }
+
+  else {
+    go(50, 50);
+
+  }
+
+  sprintf(simbol, "%d", brojac);
+  display(simbol);
+
+}
